@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
     #swagger.produces = ['application/json']
     #swagger.responses[200] = {
         description: 'OK - Returns an array of contacts.',
-        schema: { type: 'array', items: { $ref: '#/definitions/Contact' } }
+        schema: { $ref: '#/definitions/ContactList' }
     }
     #swagger.responses[500] = { description: 'Internal Server Error' }
     */
@@ -54,9 +54,9 @@ router.post('/', (req, res, next) => {
     #swagger.produces = ['application/json']
     #swagger.parameters['body'] = {
         in: 'body',
-        description: 'The contact to create. All five fields are required.',
+        description: 'The contact to create. All five fields are required. Do not send an _id, MongoDB assigns it.',
         required: true,
-        schema: { $ref: '#/definitions/Contact' },
+        schema: { $ref: '#/definitions/ContactInput' },
         example: {
             firstName: 'Sofia',
             lastName: 'Ramirez',
@@ -89,9 +89,9 @@ router.put('/:id', (req, res, next) => {
     }
     #swagger.parameters['body'] = {
         in: 'body',
-        description: 'The new values for the contact. All five fields are required.',
+        description: 'The new values for the contact. All five fields are required. Do not send an _id.',
         required: true,
-        schema: { $ref: '#/definitions/Contact' },
+        schema: { $ref: '#/definitions/ContactInput' },
         example: {
             firstName: 'Sofia',
             lastName: 'Ramirez',
