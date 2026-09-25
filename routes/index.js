@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// Serve Swagger docs and the user routes from here.
 router.use('/api-docs', require('./swagger'));
 
 router.get('/', (req, res) => {

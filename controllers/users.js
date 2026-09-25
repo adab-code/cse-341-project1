@@ -3,6 +3,7 @@ const objectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
     //#swagger.tags['Users']
+    // Fetch every user in the collection.
     const result = await mongodb.getDatabase().db().collection('users').find();
     result.toArray().then((users) => {
         res.setHeader('Content-Type', 'application/json');
@@ -11,6 +12,7 @@ const getAll = async (req, res) => {
 };
 const getSingle = async (req, res) => {
     //#swagger.tags['Users']
+    // Fetch a single user by id.
     const userId = new objectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('users').find({ _id: userId });
     result.toArray().then((users) => {
@@ -21,6 +23,7 @@ const getSingle = async (req, res) => {
 
 const createUser = async (req, res) => {
     //#swagger.tags['Users']
+    // Build the new user from the request body.
     const user = {
         // firstName: req.body.firstName,
         // lastName: req.body.lastName,
@@ -42,6 +45,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     //#swagger.tags['Users']
+    // Replace an existing user with the submitted data.
     const userId = new objectId(req.params.id);
     const user = {
         email: req.body.email,
@@ -59,6 +63,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     //#swagger.tags['Users']
+    // Remove a single user by id.
     const userId = new objectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('users').deleteOne({ _id: userId });
     if (response.deletedCount > 0) {
